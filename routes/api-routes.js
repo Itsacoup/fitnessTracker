@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 
+// get all work outs
 router.get("/api/workouts", function (req, res) {
     db.Workout.find({}).then(dbWorkout => {
         dbWorkout.forEach(workout => {
@@ -18,6 +19,7 @@ router.get("/api/workouts", function (req, res) {
     });
 });
 
+// update the selected workout by id
 router.put("/api/workouts/:id", function (req, res) {
     db.Workout.findOneAndUpdate(
         { _id: req.params.id },
@@ -33,6 +35,7 @@ router.put("/api/workouts/:id", function (req, res) {
 
 });
 
+// creates a new wokrout
 router.post("/api/workouts", function ({ body }, res) {
     db.Workout.create(body).then((dbWorkout => {
         res.json(dbWorkout);
@@ -41,6 +44,7 @@ router.post("/api/workouts", function ({ body }, res) {
     });
 });
 
+// get all for range
 router.get("/api/workouts/range", function (req, res) {
     db.Workout.find({}).then(dbWorkout => {
         res.json(dbWorkout);
